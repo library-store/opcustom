@@ -30,7 +30,7 @@ class Action {
 			$file = DIR_APPLICATION . 'controller/' . implode('/', $parts) . '.php';
 
 			if (is_file($file)) {
-				$this->route = implode('/', $parts);		
+				$this->route = implode('/', $parts);
 				
 				break;
 			} else {
