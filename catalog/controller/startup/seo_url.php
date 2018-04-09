@@ -9,10 +9,6 @@ class ControllerStartupSeoUrl extends Controller
             $this->url->addRewrite($this);
         }
 
-        echo '<pre>';
-        print_r($this->request);
-        echo '</pre>';
-
         // Decode URL
         if (isset($this->request->get['_route_'])) {
             $parts = explode('/', $this->request->get['_route_']);
@@ -59,10 +55,10 @@ class ControllerStartupSeoUrl extends Controller
                      * Route danh mục bài viết
                      */
                     if ($url[0] == 'category_post_id') {
-                        if (!isset($this->request->get['path'])) {
-                            $this->request->get['path'] = $url[1];
+                        if (!isset($this->request->get['path_post'])) {
+                            $this->request->get['path_post'] = $url[1];
                         } else {
-                            $this->request->get['path'] .= '_' . $url[1];
+                            $this->request->get['path_post'] .= '_' . $url[1];
                         }
                     }
 
@@ -106,7 +102,7 @@ class ControllerStartupSeoUrl extends Controller
 
         foreach ($data as $key => $value) {
             if (isset($data['route'])) {
-                if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id')) {
+                if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'information/information' && $key == 'information_id') || ($data['route'] == 'post/post' && $key == 'post_id')) {
                     $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
                     if ($query->num_rows && $query->row['keyword']) {
@@ -119,6 +115,22 @@ class ControllerStartupSeoUrl extends Controller
 
                     foreach ($categories as $category) {
                         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = 'category_id=" . (int)$category . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+
+                        if ($query->num_rows && $query->row['keyword']) {
+                            $url .= '/' . $query->row['keyword'];
+                        } else {
+                            $url = '';
+
+                            break;
+                        }
+                    }
+
+                    unset($data[$key]);
+                } elseif ($key == 'path_post') {
+                    $categories = explode('_', $value);
+
+                    foreach ($categories as $category) {
+                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = 'category_post_id=" . (int)$category . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
                         if ($query->num_rows && $query->row['keyword']) {
                             $url .= '/' . $query->row['keyword'];
