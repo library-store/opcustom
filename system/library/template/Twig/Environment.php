@@ -85,8 +85,8 @@ class Twig_Environment
      *                   (default to -1 which means that all optimizations are enabled;
      *                   set it to 0 to disable).
      *
-     * @param Twig_LoaderInterface $loader  A Twig_LoaderInterface instance
-     * @param array                $options An array of options
+     * @param Twig_LoaderInterface $loader A Twig_LoaderInterface instance
+     * @param array $options An array of options
      */
     public function __construct(Twig_LoaderInterface $loader = null, $options = array())
     {
@@ -97,21 +97,21 @@ class Twig_Environment
         }
 
         $options = array_merge(array(
-            'debug' => false,
-            'charset' => 'UTF-8',
+            'debug'               => false,
+            'charset'             => 'UTF-8',
             'base_template_class' => 'Twig_Template',
-            'strict_variables' => false,
-            'autoescape' => 'html',
-            'cache' => false,
-            'auto_reload' => null,
-            'optimizations' => -1,
+            'strict_variables'    => false,
+            'autoescape'          => 'html',
+            'cache'               => false,
+            'auto_reload'         => null,
+            'optimizations'       => -1,
         ), $options);
 
-        $this->debug = (bool) $options['debug'];
+        $this->debug = (bool)$options['debug'];
         $this->charset = strtoupper($options['charset']);
         $this->baseTemplateClass = $options['base_template_class'];
-        $this->autoReload = null === $options['auto_reload'] ? $this->debug : (bool) $options['auto_reload'];
-        $this->strictVariables = (bool) $options['strict_variables'];
+        $this->autoReload = null === $options['auto_reload'] ? $this->debug : (bool)$options['auto_reload'];
+        $this->strictVariables = (bool)$options['strict_variables'];
         $this->setCache($options['cache']);
 
         $this->addExtension(new Twig_Extension_Core());
@@ -302,7 +302,7 @@ class Twig_Environment
      *  * The currently enabled extensions;
      *  * Whether the Twig C extension is available or not.
      *
-     * @param string   $name  The name for which to calculate the template class name
+     * @param string $name The name for which to calculate the template class name
      * @param int|null $index The index if it is an embedded template
      *
      * @return string The template class name
@@ -313,7 +313,7 @@ class Twig_Environment
         $key .= json_encode(array_keys($this->extensions));
         $key .= function_exists('twig_template_get_attributes');
 
-        return $this->templateClassPrefix.hash('sha256', $key).(null === $index ? '' : '_'.$index);
+        return $this->templateClassPrefix . hash('sha256', $key) . (null === $index ? '' : '_' . $index);
     }
 
     /**
@@ -333,8 +333,8 @@ class Twig_Environment
     /**
      * Renders a template.
      *
-     * @param string $name    The template name
-     * @param array  $context An array of parameters to pass to the template
+     * @param string $name The template name
+     * @param array $context An array of parameters to pass to the template
      *
      * @return string The rendered template
      *
@@ -350,8 +350,8 @@ class Twig_Environment
     /**
      * Displays a template.
      *
-     * @param string $name    The template name
-     * @param array  $context An array of parameters to pass to the template
+     * @param string $name The template name
+     * @param array $context An array of parameters to pass to the template
      *
      * @throws Twig_Error_Loader  When the template cannot be found
      * @throws Twig_Error_Syntax  When an error occurred during compilation
@@ -365,8 +365,8 @@ class Twig_Environment
     /**
      * Loads a template by name.
      *
-     * @param string $name  The template name
-     * @param int    $index The index if it is an embedded template
+     * @param string $name The template name
+     * @param int $index The index if it is an embedded template
      *
      * @return Twig_TemplateInterface A template instance representing the given template name
      *
@@ -400,7 +400,7 @@ class Twig_Environment
                     $this->cache->write($key, $content);
                 }
 
-                eval('?>'.$content);
+                eval('?>' . $content);
             }
         }
 
@@ -457,7 +457,7 @@ class Twig_Environment
      * not changed.
      *
      * @param string $name The template name
-     * @param int    $time The last modification time of the cached template
+     * @param int $time The last modification time of the cached template
      *
      * @return bool true if the template is fresh, false otherwise
      */
@@ -570,7 +570,7 @@ class Twig_Environment
      * Tokenizes a source code.
      *
      * @param string $source The template source code
-     * @param string $name   The template name
+     * @param string $name The template name
      *
      * @return Twig_TokenStream A Twig_TokenStream instance
      *
@@ -659,7 +659,7 @@ class Twig_Environment
      * Compiles a template source code.
      *
      * @param string $source The template source code
-     * @param string $name   The template name
+     * @param string $name The template name
      *
      * @return string The compiled PHP source code
      *
@@ -671,7 +671,7 @@ class Twig_Environment
             $compiled = $this->compile($this->parse($this->tokenize($source, $name)), $source);
 
             if (isset($source[0])) {
-                $compiled .= '/* '.str_replace(array('*/', "\r\n", "\r", "\n"), array('*//* ', "\n", "\n", "*/\n/* "), $source)."*/\n";
+                $compiled .= '/* ' . str_replace(array('*/', "\r\n", "\r", "\n"), array('*//* ', "\n", "\n", "*/\n/* "), $source) . "*/\n";
             }
 
             return $compiled;
@@ -925,7 +925,7 @@ class Twig_Environment
     /**
      * Registers a Filter.
      *
-     * @param string|Twig_SimpleFilter               $name   The filter name or a Twig_SimpleFilter instance
+     * @param string|Twig_SimpleFilter $name The filter name or a Twig_SimpleFilter instance
      * @param Twig_FilterInterface|Twig_SimpleFilter $filter A Twig_FilterInterface instance or a Twig_SimpleFilter instance
      */
     public function addFilter($name, $filter = null)
@@ -974,7 +974,7 @@ class Twig_Environment
             $pattern = str_replace('\\*', '(.*?)', preg_quote($pattern, '#'), $count);
 
             if ($count) {
-                if (preg_match('#^'.$pattern.'$#', $name, $matches)) {
+                if (preg_match('#^' . $pattern . '$#', $name, $matches)) {
                     array_shift($matches);
                     $filter->setArguments($matches);
 
@@ -1020,7 +1020,7 @@ class Twig_Environment
     /**
      * Registers a Test.
      *
-     * @param string|Twig_SimpleTest             $name The test name or a Twig_SimpleTest instance
+     * @param string|Twig_SimpleTest $name The test name or a Twig_SimpleTest instance
      * @param Twig_TestInterface|Twig_SimpleTest $test A Twig_TestInterface instance or a Twig_SimpleTest instance
      */
     public function addTest($name, $test = null)
@@ -1084,7 +1084,7 @@ class Twig_Environment
     /**
      * Registers a Function.
      *
-     * @param string|Twig_SimpleFunction                 $name     The function name or a Twig_SimpleFunction instance
+     * @param string|Twig_SimpleFunction $name The function name or a Twig_SimpleFunction instance
      * @param Twig_FunctionInterface|Twig_SimpleFunction $function A Twig_FunctionInterface instance or a Twig_SimpleFunction instance
      */
     public function addFunction($name, $function = null)
@@ -1133,7 +1133,7 @@ class Twig_Environment
             $pattern = str_replace('\\*', '(.*?)', preg_quote($pattern, '#'), $count);
 
             if ($count) {
-                if (preg_match('#^'.$pattern.'$#', $name, $matches)) {
+                if (preg_match('#^' . $pattern . '$#', $name, $matches)) {
                     array_shift($matches);
                     $function->setArguments($matches);
 
@@ -1182,8 +1182,8 @@ class Twig_Environment
      * New globals can be added before compiling or rendering a template;
      * but after, you can only update existing globals.
      *
-     * @param string $name  The global name
-     * @param mixed  $value The global value
+     * @param string $name The global name
+     * @param mixed $value The global value
      */
     public function addGlobal($name, $value)
     {

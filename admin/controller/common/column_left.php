@@ -15,7 +15,36 @@ class ControllerCommonColumnLeft extends Controller {
 				'href'     => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true),
 				'children' => array()
 			);
-			
+
+			// Post
+			$post = array();
+
+			if ($this->user->hasPermission('access', 'post/category')) {
+				$post[] = array(
+					'name'	   => $this->language->get('text_category'),
+					'href'     => $this->url->link('post/category', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+
+			if ($this->user->hasPermission('access', 'post/post')) {
+				$post[] = array(
+					'name'	   => $this->language->get('text_post'),
+					'href'     => $this->url->link('post/post', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+
+			if ($post) {
+				$data['menus'][] = array(
+					'id'       => 'menu-post',
+					'icon'	   => 'fa-pencil',
+					'name'	   => $this->language->get('text_post'),
+					'href'     => '',
+					'children' => $post
+				);
+			}
+
 			// Catalog
 			$catalog = array();
 			

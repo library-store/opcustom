@@ -47,7 +47,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
      */
     public function getEnvironment()
     {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 1.20 and will be removed in 2.0.', E_USER_DEPRECATED);
+        @trigger_error('The ' . __METHOD__ . ' method is deprecated since version 1.20 and will be removed in 2.0.', E_USER_DEPRECATED);
 
         return $this->env;
     }
@@ -110,15 +110,15 @@ abstract class Twig_Template implements Twig_TemplateInterface
      * This method is for internal use only and should never be called
      * directly.
      *
-     * @param string $name    The block name to display from the parent
-     * @param array  $context The context
-     * @param array  $blocks  The current set of blocks
+     * @param string $name The block name to display from the parent
+     * @param array $context The context
+     * @param array $blocks The current set of blocks
      *
      * @internal
      */
     public function displayParentBlock($name, array $context, array $blocks = array())
     {
-        $name = (string) $name;
+        $name = (string)$name;
 
         if (isset($this->traits[$name])) {
             $this->traits[$name][0]->displayBlock($name, $context, $blocks, false);
@@ -135,16 +135,16 @@ abstract class Twig_Template implements Twig_TemplateInterface
      * This method is for internal use only and should never be called
      * directly.
      *
-     * @param string $name      The block name to display
-     * @param array  $context   The context
-     * @param array  $blocks    The current set of blocks
-     * @param bool   $useBlocks Whether to use the current set of blocks
+     * @param string $name The block name to display
+     * @param array $context The context
+     * @param array $blocks The current set of blocks
+     * @param bool $useBlocks Whether to use the current set of blocks
      *
      * @internal
      */
     public function displayBlock($name, array $context, array $blocks = array(), $useBlocks = true)
     {
-        $name = (string) $name;
+        $name = (string)$name;
 
         if ($useBlocks && isset($blocks[$name])) {
             $template = $blocks[$name][0];
@@ -192,9 +192,9 @@ abstract class Twig_Template implements Twig_TemplateInterface
      * This method is for internal use only and should never be called
      * directly.
      *
-     * @param string $name    The block name to render from the parent
-     * @param array  $context The context
-     * @param array  $blocks  The current set of blocks
+     * @param string $name The block name to render from the parent
+     * @param array $context The context
+     * @param array $blocks The current set of blocks
      *
      * @return string The rendered block
      *
@@ -214,10 +214,10 @@ abstract class Twig_Template implements Twig_TemplateInterface
      * This method is for internal use only and should never be called
      * directly.
      *
-     * @param string $name      The block name to render
-     * @param array  $context   The context
-     * @param array  $blocks    The current set of blocks
-     * @param bool   $useBlocks Whether to use the current set of blocks
+     * @param string $name The block name to render
+     * @param array $context The context
+     * @param array $blocks The current set of blocks
+     * @param bool $useBlocks Whether to use the current set of blocks
      *
      * @return string The rendered block
      *
@@ -252,7 +252,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
      */
     public function hasBlock($name)
     {
-        return isset($this->blocks[(string) $name]);
+        return isset($this->blocks[(string)$name]);
     }
 
     /**
@@ -407,7 +407,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
      * Auto-generated method to display the template with the given context.
      *
      * @param array $context An array of parameters to pass to the template
-     * @param array $blocks  An array of blocks to pass to the template
+     * @param array $blocks An array of blocks to pass to the template
      */
     abstract protected function doDisplay(array $context, array $blocks = array());
 
@@ -422,9 +422,9 @@ abstract class Twig_Template implements Twig_TemplateInterface
      * access for versions of PHP before 5.4. This is not a way to override
      * the way to get a variable value.
      *
-     * @param array  $context           The context
-     * @param string $item              The variable to return from the context
-     * @param bool   $ignoreStrictCheck Whether to ignore the strict variable check or not
+     * @param array $context The context
+     * @param string $item The variable to return from the context
+     * @param bool $ignoreStrictCheck Whether to ignore the strict variable check or not
      *
      * @return mixed The content of the context variable
      *
@@ -448,12 +448,12 @@ abstract class Twig_Template implements Twig_TemplateInterface
     /**
      * Returns the attribute value for a given array/object.
      *
-     * @param mixed  $object            The object or array from where to get the item
-     * @param mixed  $item              The item to get from the array or object
-     * @param array  $arguments         An array of arguments to pass if the item is an object method
-     * @param string $type              The type of attribute (@see Twig_Template constants)
-     * @param bool   $isDefinedTest     Whether this is only a defined check
-     * @param bool   $ignoreStrictCheck Whether to ignore the strict attribute check or not
+     * @param mixed $object The object or array from where to get the item
+     * @param mixed $item The item to get from the array or object
+     * @param array $arguments An array of arguments to pass if the item is an object method
+     * @param string $type The type of attribute (@see Twig_Template constants)
+     * @param bool $isDefinedTest Whether this is only a defined check
+     * @param bool $ignoreStrictCheck Whether to ignore the strict attribute check or not
      *
      * @return mixed The attribute value, or a Boolean when $isDefinedTest is true, or null when the attribute is not set and $ignoreStrictCheck is true
      *
@@ -463,7 +463,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
     {
         // array
         if (self::METHOD_CALL !== $type) {
-            $arrayItem = is_bool($item) || is_float($item) ? (int) $item : $item;
+            $arrayItem = is_bool($item) || is_float($item) ? (int)$item : $item;
 
             if ((is_array($object) && array_key_exists($arrayItem, $object))
                 || ($object instanceof ArrayAccess && isset($object[$arrayItem]))
@@ -530,7 +530,7 @@ abstract class Twig_Template implements Twig_TemplateInterface
 
         // object property
         if (self::METHOD_CALL !== $type && !$object instanceof self) { // Twig_Template does not have public properties, and we don't want to allow access to internal ones
-            if (isset($object->$item) || array_key_exists((string) $item, $object)) {
+            if (isset($object->$item) || array_key_exists((string)$item, $object)) {
                 if ($isDefinedTest) {
                     return true;
                 }
@@ -570,13 +570,13 @@ abstract class Twig_Template implements Twig_TemplateInterface
         $call = false;
         $lcItem = strtolower($item);
         if (isset(self::$cache[$class]['methods'][$lcItem])) {
-            $method = (string) $item;
-        } elseif (isset(self::$cache[$class]['methods']['get'.$lcItem])) {
-            $method = 'get'.$item;
-        } elseif (isset(self::$cache[$class]['methods']['is'.$lcItem])) {
-            $method = 'is'.$item;
+            $method = (string)$item;
+        } elseif (isset(self::$cache[$class]['methods']['get' . $lcItem])) {
+            $method = 'get' . $item;
+        } elseif (isset(self::$cache[$class]['methods']['is' . $lcItem])) {
+            $method = 'is' . $item;
         } elseif (isset(self::$cache[$class]['methods']['__call'])) {
-            $method = (string) $item;
+            $method = (string)$item;
             $call = true;
         } else {
             if ($isDefinedTest) {

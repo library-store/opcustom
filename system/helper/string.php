@@ -14,3 +14,10 @@ if (!function_exists('str_slug')) {
         return Str::slug($title, $separator);
     }
 }
+
+if (!function_exists('str_ascii')) {
+    function str_ascii($title)
+    {
+        return Str::ascii($title);
+    }
+}
