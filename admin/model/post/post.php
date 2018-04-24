@@ -263,18 +263,6 @@ class ModelPostPost extends Model
             $sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
         }
 
-        if (!empty($data['filter_model'])) {
-            $sql .= " AND p.model LIKE '" . $this->db->escape($data['filter_model']) . "%'";
-        }
-
-        if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
-            $sql .= " AND p.price LIKE '" . $this->db->escape($data['filter_price']) . "%'";
-        }
-
-        if (isset($data['filter_quantity']) && $data['filter_quantity'] !== '') {
-            $sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
-        }
-
         if (isset($data['filter_status']) && $data['filter_status'] !== '') {
             $sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
         }

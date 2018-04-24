@@ -1,5 +1,5 @@
 {{ header }}
-<div id="product-product" class="container">
+<div id="post-category" class="container">
     <ul class="breadcrumb">
         {% for breadcrumb in breadcrumbs %}
             <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
@@ -8,6 +8,23 @@
     <div class="row">
         <div class="container">
             <h1>{{ heading_title }}</h1>
+            <h3>{{ description }}</h3>
+
+            <div class="row"> {% for post in posts %}
+                    <div class="post-layout post-list col-xs-12">
+                        <div class="post-thumb">
+                            <div class="image"><a href="{{ post.href }}"><img src="{{ post.thumb }}" alt="{{ post.name }}" title="{{ post.name }}" class="img-responsive" /></a></div>
+                        </div>
+                        <div class="post-name">
+                            <h3><a href="{{ post.href }}">{{ post.name }}</a></h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-sm-6 text-left">{{ pagination }}</div>
+                <div class="col-sm-6 text-right">{{ results }}</div>
+            </div>
         </div>
     </div>
 </div>
