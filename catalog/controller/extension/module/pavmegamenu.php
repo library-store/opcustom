@@ -10,6 +10,7 @@
 class ControllerExtensionModulePavmegamenu extends Controller {
 
 	public $data;
+
 	public function index($setting) {
 		static $module = 0;
 			

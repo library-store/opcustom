@@ -109,6 +109,21 @@
 			</td>
 		</tr>
 
+		<tr id="megamenutype-category-post" class="megamenutype">
+			<td class="col-sm-3">{{ entry_category_post }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="path-post" value="{{ megamenu-category-post }}" size="100" />
+                <i>{{ text_explain_input_auto }}</i>
+			</td>
+		</tr>
+
+		<tr id="megamenutype-post" class="megamenutype">
+			<td class="col-sm-3">{{ entry_post }}</td>
+			<td class="col-sm-9">
+				<input type="text" class="form-control" name="megamenu-post" value="{{ megamenu-post }}" size="100" />
+                <i>{{ text_explain_input_auto }}</i>
+			</td>
+		</tr>
 	
 		<tr id="megamenutype-html" class="megamenutype">
 			<td class="col-sm-3">{{ entry_html }}</td>
@@ -184,8 +199,6 @@
 				</select>
  			</td>
 		</tr>
-		
-		
 		
 		<tr class="alert alert-danger">
 			<td class="col-sm-3">{{ entry_sub_menutype }}</td>
@@ -272,9 +285,7 @@ $('#content_text').summernote({
 	height: 300
 });
 
-
 $('#language-{{ module_row }} li:first-child a').tab('show');
-
 
 $(".megamenutype").hide();
 $("#megamenutype-"+ $("#megamenutype").val()).show();
@@ -282,8 +293,6 @@ $("#megamenutype").change( function(){
 	$(".megamenutype").hide();
 	$("#megamenutype-"+$(this).val()).show();
 } );
-
-   
 
 $('input[name=\'megamenu-manufacturer\']').autocomplete({
 	delay: 500,
@@ -387,5 +396,69 @@ $('input[name=\'path\']').autocomplete({
 	focus: function(event, ui) {
       	return false;
    	}
+});
+
+$('input[name=\'megamenu-post\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=post/post/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+					'post_id':  0,
+					'name':  '{{ text_none }}'
+				});
+
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.post_id
+					}
+				}));
+			}
+		});
+	},
+	select: function(event, ui) {
+		$('input[name=\'megamenu-post\']').val(ui.item.label);
+		$('input[name=\'megamenu[item]\']').val(ui.item.value);
+
+		return false;
+	},
+	focus: function(event, ui) {
+		return false;
+	}
+});
+
+$('input[name=\'path-post\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=post/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {
+				json.unshift({
+					'category_id':  0,
+					'name':  '{{ text_none }}'
+				});
+
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.category_id
+					}
+				}));
+			}
+		});
+	},
+	select: function(event, ui) {
+		$('input[name=\'path-post\']').val(ui.item.label);
+		$('input[name=\'megamenu[item]\']').val(ui.item.value);
+
+		return false;
+	},
+	focus: function(event, ui) {
+		return false;
+	}
 });
 </script>

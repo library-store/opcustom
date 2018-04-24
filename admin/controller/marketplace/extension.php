@@ -26,7 +26,7 @@ class ControllerMarketplaceExtension extends Controller {
 		} else {
 			$data['type'] = '';
 		}
-		
+
 		$data['categories'] = array();
 		
 		$files = glob(DIR_APPLICATION . 'controller/extension/extension/*.php', GLOB_BRACE);

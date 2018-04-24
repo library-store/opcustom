@@ -58,6 +58,8 @@ $_['entry_type']   		  = 'Type:';
 $_['entry_url']    		  = 'URL:';
 $_['entry_category']      = 'Category:';
 $_['entry_product']    	  = 'Product:';
+$_['entry_category_post'] = 'Category Post:';
+$_['entry_post']    	  = 'Post:';
 $_['entry_manufacturer']  = 'Manufacturer:';
 $_['entry_information']   = 'Information:';
 $_['entry_html']    	  = 'HTML:';
@@ -80,7 +82,7 @@ $_['text_explain_submenu_cols'] = 'Enter detail width of each subcols in values 
 $_['text_explain_submenu_type'] = 'If the type is Menu, so submenus of this will be showed';
 $_['text_browse']   = 'Browser';
 $_['text_clear']    = 'Clear';
-$_['entry_publish'] = 'is Published'; 
+$_['entry_publish'] = 'is Published';
 
 
 $_['button_save_store']     = "Save Store";
@@ -105,7 +107,7 @@ $_['text_explain_live_editor'] = 'By using this tool, allow to create sub menu h
 $_['text_widget_product_category'] = "Products Category";
 $_['entry_widget_id']              = 'Widget ID';
 
-$_['text_explain_widgets']         = 'Widgets has feature, function same as Opencart Modules which supported by megamenu. 
+$_['text_explain_widgets']         = 'Widgets has feature, function same as Opencart Modules which supported by megamenu.
 			You create instances of Widgets to use for content of submenu item or column of mega menu';
 
 $_['text_widget_product'] 	       = "Product";
@@ -114,13 +116,13 @@ $_['text_widget_banner'] 	       = "Banner";
 $_['text_widget_image'] 	   	   = "Image";
 $_['text_widget_video_code']   	   = "Video Code";
 $_['text_widget_feed'] 		   	   = "Feed";
-$_['text_pavo_blogs']		   	   = "Latest Pavo Blogs"; 
+$_['text_pavo_blogs']		   	   = "Latest Pavo Blogs";
 $_['text_delete']			       = "Delete";
 $_['text_add_widget'] 		       = 'Add/Edit Widget';
 $_['text_widget_product_id']       = 'Product ID';
 $_['text_widget_image_size']       = 'Image Size';
 $_['text_widget_category_id']  = 'Category ID';
-$_['text_widget_limit'] 	   = 'Widget Limit';	
+$_['text_widget_limit'] 	   = 'Widget Limit';
 $_['message_error_no_form_widget'] = '<div class="warning">Could not find any Form for this widget</div>';
 $_['text_please_fill_data']    = 'Please enter value for all input fields';
 
@@ -171,8 +173,8 @@ $_['entry_menu_param']            = "Menu Param";
 $_['entry_menu_title']            = "Title";
 $_['entry_menu_type']             = "Menu Type";
 $_['entry_blockbuilder'] 			= 'BlockBuilder';
-$_['text_confirm_delete']         = "Are you sure to delete this";	
-$_['text_process_request']        = "processing request...";	
+$_['text_confirm_delete']         = "Are you sure to delete this";
+$_['text_process_request']        = "processing request...";
 
 
 $_['text_success_update_tree']    = " Success: You have modified Tree Menu-Items!";
@@ -182,7 +184,7 @@ $_['text_save']    = "Save";
 $_['entry_badges']    = "Badges";
 $_['entry_submenu_width'] = 'Submenu Width';
 $_['entry_submenu_width_explain'] 	  = 'As default width is around 250px, you can set width in px here';
- 
+
 $_['entry_submenu_alignment'] = 'Submenu Alignment';
 $_['entry_submenu_alignment_explain'] = 'You can set submenu in fullwidth, align left, algin right, or auto';
 $_['text_url']	   		  = "URL";
@@ -192,4 +194,6 @@ $_['text_html']	  		  = "HTML";
 $_['text_blockbuilder']	  = "Block Builder";
 $_['text_product']		  = "Product";
 $_['text_manufacturer']	  = "Manufacturer";
+$_['text_post']	  		  = "Post";
+$_['text_category_post']  = "Category Post";
 ?>
